@@ -12,6 +12,7 @@ import {
   Outlet,
   RouterProvider,
 } from "react-router-dom";
+
 import { DarkModeContext } from "./context/darkModeContext";
 import { AuthContext } from "./context/authContext";
 
