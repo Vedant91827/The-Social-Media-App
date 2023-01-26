@@ -6,15 +6,17 @@ import Profile from "./pages/profile/Profile";
 import {LeftBar , RightBar , Navbar} from "./components";
 import { Navigate } from "react-router-dom";
 import './style.scss';
-
 import {
   createBrowserRouter,
   Outlet,
   RouterProvider,
 } from "react-router-dom";
-
 import { DarkModeContext } from "./context/darkModeContext";
 import { AuthContext } from "./context/authContext";
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 
 
 function App() {
@@ -25,9 +27,12 @@ function App() {
 
   // console.log(darkMode);
 
+  const queryClient = new QueryClient()
 
   const Layout = () => {
     return (
+      <QueryClientProvider client={queryClient}>
+
       <div className={`theme-${darkMode ? "dark" : "light" }`}>
         <Navbar/>
           <div style={{display: "flex"}}>
@@ -38,6 +43,7 @@ function App() {
             <RightBar/>
           </div>
       </div>
+      </QueryClientProvider>
     )
   };
 
