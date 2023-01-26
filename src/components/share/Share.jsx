@@ -6,10 +6,13 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
+
 const Share = () => {
   const [file, setFile] = useState(null);
   const [desc, setDesc] = useState("");
 
+  //this upload will help to upload image and store it in api's database as we created upload endpoint in index.js of api
+  //this uploaded image will be stored in public/upload folder once we upload and hit share button
   const upload = async () => {
     try {
       const formData = new FormData();
