@@ -14,9 +14,13 @@ import { makeRequest } from '../../axios';
 import { useLocation } from 'react-router-dom';
 import { AuthContext } from '../../context/authContext';
 import { useContext } from 'react';
+import Update from '../../components/update/Update';
+import { useState } from 'react';
 
 
 const Profile = () => {
+
+  const [openUpdate, setOpenUpdate] = useState(false)
 
   const {currentUser} = useContext(AuthContext);
 
@@ -58,11 +62,11 @@ const Profile = () => {
     <div className="profile">
       {isLoading ? "loading" : <><div className="images">
         <img 
-          src={data?.coverPic} 
+          src={"/upload/"+data?.coverPic} 
           alt="CoverPic" 
           className="cover" />
         <img 
-          src={data?.profilePic} 
+          src={"/upload/"+data?.profilePic} 
           alt="ProfilePic" 
           className="profilePicture" />
       </div>
@@ -94,7 +98,8 @@ const Profile = () => {
                 <span>{data?.website}</span>
               </div>
             </div>
-             {rIsLoading ? "loading" : userId === currentUser.id ? <button>Update</button>: 
+             {rIsLoading ? "loading" : userId === currentUser.id ? 
+              <button onClick={()=>setOpenUpdate(true)}>Update</button>: 
               <button onClick={handleFollow}>{relationshipData?.includes(currentUser.id) ? "Following" : "Follow"}</button>}
           </div>
           <div className="right">
@@ -104,6 +109,7 @@ const Profile = () => {
         </div>
       <Posts userId={userId}/>
       </div></>}
+      {openUpdate && <Update setOpenUpdate={setOpenUpdate} user={data}/>}
     </div>
   )
 }
