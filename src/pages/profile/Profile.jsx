@@ -9,13 +9,62 @@ import LanguageIcon from "@mui/icons-material/Language";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Posts from "../../components/posts/Posts"
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { makeRequest } from '../../axios';
+import { useLocation } from 'react-router-dom';
+import { AuthContext } from '../../context/authContext';
+import { useContext } from 'react';
+
 
 const Profile = () => {
+
+  const {currentUser} = useContext(AuthContext);
+
+  const userId = parseInt(useLocation().pathname.split("/")[2]) //split url into parts and third part is id
+
+  const { isLoading, data } = useQuery(["user"], () =>
+    makeRequest.get("/users/find/" + userId).then((res) => {
+      return res.data;
+    })
+  );
+
+  const {isLoading : rIsLoading , data: relationshipData } = useQuery(["relationship"], () =>
+    makeRequest.get("/relationships?followedUserId=" + userId).then((res) => {
+      return res.data;
+    })
+  );
+
+  // console.log(relationshipData);
+
+  const queryClient = useQueryClient();
+  const mutation = useMutation(
+    (following) => {
+      if(following) return makeRequest.delete("/relationships?userId="+ userId);
+      return makeRequest.post("/relationships",{userId})
+    },
+    {
+      onSuccess: () => {
+        // Invalidate and refetch : this will refresh when change happens
+        queryClient.invalidateQueries(["relationship"]);
+      },
+    }
+  );
+  
+  const handleFollow = () => {
+    mutation.mutate(relationshipData.includes(currentUser.id))
+  }
+
   return (
     <div className="profile">
-      <div className="images">
-        <img src="https://images.newindianexpress.com/uploads/user/imagelibrary/2019/3/7/w900X450/Take_in_the_Scenery.jpg?w=400&dpr=2.6" alt="CoverPic" className="cover" />
-        <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="ProfilePic" className="profilePicture" />
+      {isLoading ? "loading" : <><div className="images">
+        <img 
+          src={data?.coverPic} 
+          alt="CoverPic" 
+          className="cover" />
+        <img 
+          src={data?.profilePic} 
+          alt="ProfilePic" 
+          className="profilePicture" />
       </div>
       <div className="profileContainer">
         <div className="uInfo">
@@ -34,18 +83,19 @@ const Profile = () => {
             </a>
           </div>
           <div className="center">
-            <span>Fyodor D</span>
+            <span>{data?.name}</span>
             <div className="info">
               <div className="item">
                 <PlaceIcon/>
-                <span>USA</span>
+                <span>{data?.city}</span>
               </div>
               <div className="item">
                 <LanguageIcon/>
-                <span>Fyodor.dev</span>
+                <span>{data?.website}</span>
               </div>
             </div>
-              <button>Follow</button>
+             {rIsLoading ? "loading" : userId === currentUser.id ? <button>Update</button>: 
+              <button onClick={handleFollow}>{relationshipData?.includes(currentUser.id) ? "Following" : "Follow"}</button>}
           </div>
           <div className="right">
             <EmailOutlinedIcon/>
@@ -53,7 +103,7 @@ const Profile = () => {
           </div>
         </div>
       <Posts/>
-      </div>
+      </div></>}
     </div>
   )
 }

@@ -17,7 +17,7 @@ const Posts = () => {
     //     },
     //     {
     //         id: 2,
-    //         name: "Lorem Wala",
+    //         name: "Lorem ",
     //         userId: 2,
     //         profilePic: "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
     //         desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, obcaecati eaque alias repudiandae",
