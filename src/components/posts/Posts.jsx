@@ -4,31 +4,13 @@ import "./posts.scss";
 import {useQuery} from '@tanstack/react-query'
 import { makeRequest } from '../../axios';
 
-const Posts = () => {
-    //Temporary Data
-    // const posts = [
-    //     {
-    //         id: 1,
-    //         name: "John Doe",
-    //         userId: 1,
-    //         profilePic: "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
-    //         desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, obcaecati eaque alias repudiandae",
-    //         img: "https://images.newindianexpress.com/uploads/user/imagelibrary/2019/3/7/w900X450/Take_in_the_Scenery.jpg?w=400&dpr=2.6",
-    //     },
-    //     {
-    //         id: 2,
-    //         name: "Lorem ",
-    //         userId: 2,
-    //         profilePic: "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
-    //         desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, obcaecati eaque alias repudiandae",
-    //     },
-    // ];
+const Posts = ({userId}) => {
 
     const { isLoading, error, data } = useQuery({
         queryKey: ['posts'],
         queryFn: () =>
         //we already have base url stored in axios so we directly write "/post"
-          makeRequest.get("/posts").then(res=>{
+          makeRequest.get("/posts?userId="+userId).then(res=>{
             return res.data;
           }) 
           
