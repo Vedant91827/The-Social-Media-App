@@ -22,7 +22,7 @@ const Navbar = () => {
     <div className='navbar'>
       <div className='left'>
         <Link to="/" style={{textDecoration:"none"}}>
-          <span>Logo</span>
+          <span>The Social Book</span>
         </Link>
         <HomeOutlinedIcon/>
         {darkMode ? <WbSunnyOutlinedIcon onClick={toggle}/> : <DarkModeOutlinedIcon onClick={toggle}/>}

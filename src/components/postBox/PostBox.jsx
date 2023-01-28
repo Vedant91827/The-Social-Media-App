@@ -49,7 +49,7 @@ const PostBox = ({post}) => {
     <div className="container">
       <div className="user">
         <div className="userInfo">
-            <img src={post.profilePic} alt="Profile" />
+            <img src={"/upload/"+post.profilePic} alt="Profile" />
             <div className="details">
               <Link to={`/profile/${post.userId}`} style={{textDecoration: "none" ,color: "inherit"}}>
                 <span className='name'>{post.name}</span>
