@@ -61,7 +61,7 @@ const PostBox = ({post}) => {
       </div>
       <div className="content">
         <p>{post.desc}</p>
-        <img src={"./upload/"+post.img} alt="PostImage" />
+        <img src={"/upload/"+post.img} alt="PostImage" />
       </div>
       <div className="info">
         <div className="item">
