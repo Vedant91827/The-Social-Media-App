@@ -6,16 +6,15 @@ import { makeRequest } from '../../axios';
 
 const Posts = ({userId}) => {
 
-    const { isLoading, error, data } = useQuery({
-        queryKey: ['posts'],
-        queryFn: () =>
-        //we already have base url stored in axios so we directly write "/post"
-          makeRequest.get("/posts?userId="+userId).then(res=>{
+      //we already have base url stored in axios so we directly write "/post"
+        const { isLoading, error, data } = useQuery(["posts"], () =>
+          makeRequest.get("/posts?userId="+userId).then((res) => {
             return res.data;
-          }) 
-          
-      })
-    //   console.log(data);
+          })
+        );
+
+      
+      console.log(data);
   return (
     <div className="posts">
         {error ? "Oops, Something Went Wrong !" : 

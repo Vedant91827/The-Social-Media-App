@@ -17,6 +17,7 @@ const Navbar = () => {
   const {currentUser} = useContext(AuthContext)
   const {toggle, darkMode} = useContext(DarkModeContext)
 
+  console.log(currentUser);
   return (
     <div className='navbar'>
       <div className='left'>
@@ -36,8 +37,10 @@ const Navbar = () => {
         <EmailOutlinedIcon/>
         <NotificationsOutlinedIcon/>
         <div className="user">
-          <img src={currentUser.profilePic} alt="userImage" />
+        <Link to={`/profile/${currentUser.id}`} style={{textDecoration: "none" ,color: "inherit"}}>
+          <img src={"/upload/"+currentUser.profilePic} alt="userImage" />
             <span>{currentUser.name}</span>
+        </Link>
         </div>
       </div>
     </div>
