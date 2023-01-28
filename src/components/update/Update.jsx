@@ -8,9 +8,11 @@ const Update = ({setOpenUpdate, user}) => {
     const [cover, setCover] = useState(null);
     const [profile, setProfile] = useState(null)
     const [texts, setTexts] = useState({
-        name: "",
-        city: "",
-        website: "",
+      email: user.email,
+      password: user.password,
+      name: user.name,
+      city: user.city,
+      website: user.website,
     });
 
     const upload = async (file) => {
