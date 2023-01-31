@@ -34,9 +34,10 @@ const Register = () => {
         <div className='card'>
             {/* Left Side */}
             <div className='left'>
-                <h1>Social Book</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto atque,</p>
+                <h1>The Social Book</h1>
+                <h2>Few Clicks away to create your first Social Book account !</h2>
                 <span>Do you have an account ?</span>
+                <br /><br />
                 <Link to='/login'>
                 <button>Login</button>
                 </Link>

@@ -44,6 +44,15 @@ const PostBox = ({post}) => {
     mutation.mutate(data.includes(currentUser.id))
   }
 
+
+  const { commentsData } = useQuery(["comments", post.id], () =>
+    makeRequest.get("/comments?postId=" + post.id).then((res) => {
+      return res.commentsData;
+    })
+  );
+    console.log(commentsData);
+  // if(commentsData?.length == )
+
   return (
     <div className="post">
     <div className="container">
@@ -70,7 +79,7 @@ const PostBox = ({post}) => {
         </div>
         <div className="item" onClick={()=>setCommentOpen(!commentOpen)}>
           <TextsmsOutlinedIcon/>
-          12 Comments
+         Comments
         </div>
         <div className="item">
           <ShareOutlinedIcon/>

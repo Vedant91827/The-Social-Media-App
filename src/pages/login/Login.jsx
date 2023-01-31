@@ -4,7 +4,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/authContext';
 import { useState } from 'react';
 
+
+
 const Login = () => {
+    
     const [inputs, setInputs] = useState({
         username:"",
         password:"",
@@ -35,8 +38,9 @@ const Login = () => {
             <div className='card'>
                 {/* Left Side */}
                 <div className='left'>
-                    <h1>Hello World</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto atque,</p>
+                    <h1>Hello !!!</h1>
+                    <h2>Good to see you again.</h2>
+                    <br /><br /><br />
                     <span>Do you have account</span>
                     <Link to="/register">
                     <button>Register</button>
