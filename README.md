@@ -2,7 +2,7 @@
 
 This Repository has Client Code which is created using React
 
-Api for this app : 
+Api for this app : <a src="https://github.com/Vedant91827/social-app-backend-api">Backend</a>
 
 <img width="610" alt="image" src="https://github.com/Vedant91827/The-Social-Media-App/assets/83276177/db684272-8373-466b-b12f-451d5bddb64c"> <br>
 
